@@ -1,0 +1,26 @@
+{
+  "name": "multer-gridfs",
+  "version": "1.0.0",
+  "description": "Multer Storage Engine to save uploads directly to MongoDB GridFS",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/BlackBoxVision/multer-gridfs.git",
+  "keywords": [
+    "multer",
+    "storage",
+    "mongo",
+    "gridfs"
+  ],
+  "author": "BlackBox Vision",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BlackBoxVision/multer-gridfs/issues"
+  },
+  "homepage": "https://github.com/BlackBoxVision/multer-gridfs#readme",
+  "dependencies": {
+    "gridfs-stream": "^1.1.1",
+    "mongoose": "^4.8.1"
+  }
+}
