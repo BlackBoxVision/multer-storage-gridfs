@@ -1,44 +1,55 @@
 import GridFs from 'gridfs-stream';
 import mongoose from 'mongoose';
 
-const conn = mongoose.connection;
 let gridFs;
 
-conn.once('open', () => {
-    gridFs = GridFs(conn.db, mongoose.mongo);
-});
+mongoose.connection.once('open', () => gridFs = new GridFs(mongoose.connection.db, mongoose.mongo));
 
-const getDestination = (req, file, cb) => cb(null);
+const defaultOptions = {
+	getDestination: (request, file, callback) => callback(null),
+	onUploadFinish: file => console.info(`Finish to upload file --> ${file}`),
+	getFileName: file => file.originalname
+};
 
 class GridFsStorage {
-	constructor(options) {
-		this.getDestination = options.destination || getDestination;
+	constructor(options = defaultOptions) {
+		this.getDestination = options.getDestination;
+		this.onUploadFinish = options.onUploadFinish;
+		this.getFileName = options.getFileName;
 	}
 
-	_handleFile = (req, file, cb) => {
-		this.getDestination(req, file, (err) => {
-			if (err) return cb(err);
+	_handleFile = (request, file, callback) => {
+		this.getDestination(request, file, error => {
+			if (error) {
+				return callback(error);
+			}
 			
-			const outStream = gridFs.createWriteStream({filename: file.originalname});
+			const outStream = gridFs.createWriteStream({
+				filename: this.getFileName(file)
+			});
 			
 			file.stream.pipe(outStream);
 			
 			outStream
-				.on('error', cb)
-				.on('close', (insertedFile) => cb(null, insertedFile))
-				.on('finish', () => console.info(`Finish to upload file --> ${file}`))
+				.on('error', error => callback(error))
+				.on('close', insertedFile => callback(null, insertedFile))
+				.on('finish', () => this.onUploadFinish(file))
 		})
 	};
 	
-	_removeFile = (req, file, cb) => {
-		gridFs.exist({ _id: file._id }, (err, found) => {
-			if (err) cb(err);
+	_removeFile = (request, file, callback) => {
+		gridFs.exist({ _id: file._id }, (error, found) => {
+			if (error) {
+				callback(error);
+			}
 			
 			if (found) {
-				gridFs.remove({ _id: file._id }, (err) => {
-					if (err) cb(err);
+				gridFs.remove({ _id: file._id }, error => {
+					if (error) {
+						callback(error);
+					}
 					
-					cb(null, { message: `Successful delete file with id --> ${file._id}` });
+					callback(null, file._id);
 				});
 			}
 		});
