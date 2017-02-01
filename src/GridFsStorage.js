@@ -12,10 +12,10 @@ const defaultOptions = {
 };
 
 class GridFsStorage {
-	constructor(options = defaultOptions) {
-		this.getDestination = options.getDestination;
-		this.onUploadFinish = options.onUploadFinish;
-		this.getFileName = options.getFileName;
+	constructor(options) {
+		this.getDestination = options.getDestination ||defaultOptions.getDestination;
+		this.onUploadFinish = options.onUploadFinish || defaultOptions.onUploadFinish;
+		this.getFileName = options.getFileName || defaultOptions.getFileName;
 	}
 
 	_handleFile = (request, file, callback) => {
