@@ -1,0 +1,1 @@
+import Storage from './lib/GridFsStorage';

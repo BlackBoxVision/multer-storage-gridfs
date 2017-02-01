@@ -1,0 +1,7 @@
+src
+node_modules
+.npmignore
+.idea
+.babelrc
+README.md
+LICENSE
