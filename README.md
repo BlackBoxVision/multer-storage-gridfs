@@ -5,7 +5,7 @@
 
 ##Installation
 
-**Yarn**
+**YARN**
 
 ```javascript
 yarn add multer-storage-gridfs 
