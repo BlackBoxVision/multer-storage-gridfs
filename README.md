@@ -1,7 +1,8 @@
-# multer-gridfs
-> :minidisc: Multer Storage Engine to save uploads directly to MongoDB GridFs
+# Multer Storage GridFS
+> :minidisc: Multer Storage Engine is the simplest way to save your files to MongoDB GridFs backed by multer
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm version](https://badge.fury.io/js/multer-storage-gridfs.svg)](https://badge.fury.io/js/multer-storage-gridfs)
+
 
 ##Installation
 
@@ -16,6 +17,21 @@ yarn add multer-storage-gridfs
 ```javascript
 npm install --save multer-storage-gridfs 
 ```
+
+##Usage
+
+The usage is really simple:
+
+```javascript
+import multer from 'multer';
+import GridFsStorage from 'multer-storage-gridfs';
+
+const upload = multer({ 
+    storage: new GridFsStorage()
+});
+```
+
+**GridFsStorage** listens to mongoose connection **"open"** event. When this event is fired, internally generates a **GridFsStream** instance and it handles the methods provided for multer custom storage. 
 
 ##Issues
 
