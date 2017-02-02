@@ -57,4 +57,3 @@ class GridFsStorage {
 }
 
 export default GridFsStorage;
-i
