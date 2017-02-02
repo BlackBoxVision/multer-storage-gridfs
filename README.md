@@ -1,7 +1,7 @@
 # multer-gridfs
 > :minidisc: Multer Storage Engine to save uploads directly to MongoDB GridFs
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm version](https://badge.fury.io/js/multer-storage-gridfs.svg)](https://badge.fury.io/js/multer-storage-gridfs)
 
 ##Installation
 
