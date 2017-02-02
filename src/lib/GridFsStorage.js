@@ -7,9 +7,9 @@ class GridFsStorage {
 	constructor(options) {
 		this.getDestination = options.getDestination || defaultOptions.getDestination;
 		this.onUploadFinish = options.onUploadFinish || defaultOptions.onUploadFinish;
-        this.getFileName = options.getFileName || defaultOptions.getFileName;
+		this.getFileName = options.getFileName || defaultOptions.getFileName;
 
-        this.streamOptions = options.streamOptions || defaultOptions.streamOptions;
+		this.streamOptions = options.streamOptions || defaultOptions.streamOptions;
 	}
 
 	_handleFile = (request, file, callback) => {
@@ -21,8 +21,8 @@ class GridFsStorage {
 			if (gridFs) {
 				const filename = this.getFileName(file);
 				const writeStreamOptions = {
-                    ...this.streamOptions,
-                    ...filename
+					...this.streamOptions,
+					filename
 				};
 
 				const outStream = gridFs.createWriteStream(writeStreamOptions);
@@ -57,3 +57,4 @@ class GridFsStorage {
 }
 
 export default GridFsStorage;
+i
