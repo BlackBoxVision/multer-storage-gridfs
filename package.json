@@ -1,6 +1,6 @@
 {
   "name": "multer-storage-gridfs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Multer Storage Engine to save uploads directly to MongoDB GridFS",
   "main": "dist/index.js",
   "scripts": {
