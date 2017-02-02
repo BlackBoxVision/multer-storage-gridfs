@@ -31,7 +31,7 @@ const upload = multer({
 });
 ```
 
-**GridFsStorage** listens to mongoose connection **"open" event**. When the connection it's open, internally generates a **GridFsStream** instance. 
+**GridFsStorage** listens to mongoose connection **"open"** event. When this event is fired, internally generates a **GridFsStream** instance and it handles the methods provided for multer custom storage. 
 
 ##Issues
 
