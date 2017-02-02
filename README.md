@@ -1,4 +1,4 @@
-# multer-gridfs
+# Multer Storage GridFS
 > :minidisc: Multer Storage Engine is the simplest way to save your files to MongoDB GridFs backed by multer
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm version](https://badge.fury.io/js/multer-storage-gridfs.svg)](https://badge.fury.io/js/multer-storage-gridfs)
