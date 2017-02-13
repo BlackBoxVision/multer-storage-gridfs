@@ -28,7 +28,7 @@ The usage is really simple:
 
 ```javascript
 import multer from 'multer';
-import GridFsStorage from 'multer-storage-gridfs';
+import { GridFsStorage } from 'multer-storage-gridfs';
 
 const upload = multer({ 
     storage: new GridFsStorage()
@@ -39,7 +39,7 @@ You can customize the behavior of the storage by passing an object:
 
 ```javascript
 import multer from 'multer';
-import GridFsStorage from 'multer-storage-gridfs';
+import { GridFsStorage } from 'multer-storage-gridfs';
 
 //Example object with custom behavior
 const options = {
