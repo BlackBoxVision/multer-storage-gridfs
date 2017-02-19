@@ -138,6 +138,28 @@ describe('Testing -> GridFS Storage', () => {
         });
     });
 
+    it('should throw an error when passing a custom error to callback as first param', done => {
+        try {
+            upload = multer({
+                storage: new GridFsStorage({
+                    getDestination: (request, file, callback) => callback(new Error('Awesome Error'))
+                })
+            });
+        } catch(error) {
+            assert.ifError(error);
+        }
+    });
+
+    it('should throw an error when mongoose connection is not open', done => {
+        try {
+            upload = multer({
+                storage: new GridFsStorage()
+            });
+        } catch(error) {
+            assert.ifError(error);
+        }
+    });
+
     //TODO Review this test
     //it('should remove uploaded files on error', done => {
         //const connection = mongoose.connection;
