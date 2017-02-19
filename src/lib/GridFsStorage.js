@@ -11,7 +11,7 @@ connection.once('open', () => {
 
 class GridFsStorage {
 	constructor(options = {}) {
-		this.getDestination = options.getDestination || defaultOptions.getDestination;
+		this.getDestination = defaultOptions.getDestination;
 		this.getFileName = options.getFilename || defaultOptions.getFilename;
 		this.streamOptions = options.streamOptions || defaultOptions.streamOptions;
 	}
