@@ -1,8 +1,7 @@
 # Multer Storage GridFS
 > :minidisc: Multer Storage Engine is the simplest way to save your files to MongoDB GridFs backed by multer
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm version](https://badge.fury.io/js/multer-storage-gridfs.svg)](https://badge.fury.io/js/multer-storage-gridfs) [![Build Status](https://travis-ci.org/BlackBoxVision/multer-storage-gridfs.svg?branch=master)](https://travis-ci.org/BlackBoxVision/multer-storage-gridfs)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![npm version](https://badge.fury.io/js/multer-storage-gridfs.svg)](https://badge.fury.io/js/multer-storage-gridfs) [![Build Status](https://travis-ci.org/BlackBoxVision/multer-storage-gridfs.svg?branch=master)](https://travis-ci.org/BlackBoxVision/multer-storage-gridfs) [![codecov](https://codecov.io/gh/BlackBoxVision/multer-storage-gridfs/branch/master/graph/badge.svg)](https://codecov.io/gh/BlackBoxVision/multer-storage-gridfs) [![Coverage Status](https://coveralls.io/repos/github/BlackBoxVision/multer-storage-gridfs/badge.svg?branch=master)](https://coveralls.io/github/BlackBoxVision/multer-storage-gridfs?branch=master)
 
 ##Installation
 
