@@ -5,9 +5,7 @@ import mongoose from 'mongoose';
 const connection = mongoose.connection;
 let gridFs;
 
-connection.once('open', () => {
-    gridFs = GridFs(connection.db, mongoose.mongo)
-});
+connection.once('open', () => gridFs = GridFs(connection.db, mongoose.mongo));
 
 class GridFsStorage {
 	constructor(options = {}) {
