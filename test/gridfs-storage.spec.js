@@ -10,7 +10,12 @@ import util from './util';
 
 let upload;
 
-mongoose.connect('mongodb://localhost:27017', err => {
+const mongo = {
+    local: 'mongodb://localhost:27017',
+    remote: 'mongodb://127.0.0.1:27017'
+}
+
+mongoose.connect(process.env.BUILD_ENABLE ? mongo.remote : mongo.local , err => {
     if (err) {
         console.info(`An error ocurred during app init: -> ${err}`);
     }
