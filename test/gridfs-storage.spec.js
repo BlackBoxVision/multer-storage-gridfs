@@ -135,29 +135,6 @@ describe('Testing -> GridFS Storage', () => {
         });
     });
 
-    it('should throw an error when passing a custom error to callback as first param', done => {
-        try {
-            const newUpload = multer({
-                storage: new GridFsStorage({
-                    getDestination: (request, file, callback) => callback(new Error('Awesome Error'))
-                })
-            });
-        } catch(error) {
-            assert.ifError(error);
-        }
-    });
-
-    it('should throw an error when mongoose connection is not open', done => {
-        try {
-            const newUpload = multer({
-                storage: new GridFsStorage()
-            });
-        } catch(error) {
-            assert.ifError(error);
-        }
-    });
-
-    //TODO Review this test
     it('should remove uploaded files on error', done => {
         const form = new FormData();
         const parser = upload.single('tiny0');
@@ -181,5 +158,31 @@ describe('Testing -> GridFS Storage', () => {
 
             done();
         });
+    });
+
+    it('should throw an error when passing a custom error to callback as first param', done => {
+        try {
+            const newUpload = multer({
+                storage: new GridFsStorage({
+                    getDestination: (request, file, callback) => callback(new Error('Awesome Error'))
+                })
+            });
+        } catch(error) {
+            assert.ifError(error);
+        }
+
+        done();
+    });
+
+    it('should throw an error when mongoose connection is not open', done => {
+        try {
+            const newUpload = multer({
+                storage: new GridFsStorage({}, null)
+            });
+        } catch(error) {
+            assert.ifError(error);
+        }
+
+        done();
     });
 });
