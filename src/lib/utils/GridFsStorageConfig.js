@@ -1,6 +1,5 @@
 export default {
-	getDestination: (request, file, callback) => callback(null),
-	onUploadFinish: file => {},
-	getFileName: file => file.originalname,
+	getDestination: (request, file) => new Promise((resolve, reject) => resolve()),
+	getFilename: (request, file) => new Promise((resolve, reject) => resolve(file.originalname)),
 	streamOptions: {}
 }

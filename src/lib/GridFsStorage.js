@@ -12,39 +12,32 @@ connection.once('open', () => {
 class GridFsStorage {
 	constructor(options = {}) {
 		this.getDestination = options.getDestination || defaultOptions.getDestination;
-		this.onUploadFinish = options.onUploadFinish || defaultOptions.onUploadFinish;
-		this.getFileName = options.getFileName || defaultOptions.getFileName;
+		this.getFileName = options.getFilename || defaultOptions.getFilename;
 		this.streamOptions = options.streamOptions || defaultOptions.streamOptions;
 	}
 
 	_handleFile = (request, file, callback) => {
-		this.getDestination(request, file, error => {
-			if (error) {
-				return callback(error);
-			}
+		this.getDestination(request, file).then(() => {
+            this.getFileName(request, file).then(filename => {
+                const writeStreamOptions = {
+                    ...this.streamOptions,
+                    filename
+                };
 
-            const filename = this.getFileName(file);
-            const writeStreamOptions = {
-                ...this.streamOptions,
-                filename
-            };
+                const outStream = gridFs.createWriteStream(writeStreamOptions);
 
-            const outStream = gridFs.createWriteStream(writeStreamOptions);
-				
-            file.stream.pipe(outStream);
-				
-            outStream
-                .on('error', error => callback(error))
-                .on('close', insertedFile => callback(null, insertedFile))
-                .on('finish', () => this.onUploadFinish(file));
-		})
+                file.stream.pipe(outStream);
+
+                outStream
+                    .on('error', callback)
+                    .on('close', file => callback(null, file));
+            });
+        });
 	};
 	
 	_removeFile = (request, file, callback) => {
         gridFs.exist({_id: file._id}, (error, found) => {
-            if (error) {
-                callback(error);
-            }
+            if (error) callback(error);
 				
             if (found) {
                 gridFs.remove({_id: file._id}, error => error ? callback(error) : callback(null, file._id));
