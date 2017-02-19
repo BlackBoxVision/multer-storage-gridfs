@@ -9,7 +9,7 @@
     "build": "npm run clean && npm run compile",
     "npm-publish": "npm run build && npm publish"
   },
-  "repository": "git+https://github.com/BlackBoxVision/multer-gridfs.git",
+  "repository": "git+https://github.com/BlackBoxVision/multer-storage-gridfs.git",
   "keywords": [
     "multer",
     "storage",
@@ -19,9 +19,9 @@
   "author": "BlackBox Vision",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BlackBoxVision/multer-gridfs/issues"
+    "url": "https://github.com/BlackBoxVision/multer-storage-gridfs/issues"
   },
-  "homepage": "https://github.com/BlackBoxVision/multer-gridfs#readme",
+  "homepage": "https://github.com/BlackBoxVision/multer-storage-gridfs#readme",
   "dependencies": {
     "gridfs-stream": "^1.1.1"
   },
