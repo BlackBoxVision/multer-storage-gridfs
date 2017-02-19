@@ -9,7 +9,7 @@
     "build": "npm run clean && npm run compile",
     "npm-publish": "npm run build && npm publish",
     "test": "mocha ./test --compilers js:babel-register --require babel-polyfill",
-    "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha"
+    "coverage": "babel-node ./node_modules/.bin/isparta cover --report text --report html _mocha"
   },
   "repository": "git+https://github.com/BlackBoxVision/multer-storage-gridfs.git",
   "keywords": [

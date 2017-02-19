@@ -161,25 +161,29 @@ describe('Testing -> GridFS Storage', () => {
     });
 
     //TODO Review this test
-    //it('should remove uploaded files on error', done => {
-        //const connection = mongoose.connection;
-        //connection.once('open', () => gridFs = GridFs(connection.db, mongoose.mongo));
+    it('should remove uploaded files on error', done => {
+        const form = new FormData();
+        const parser = upload.single('tiny0');
 
-        //const form = new FormData();
-        //const parser = upload.single('tiny0');
+        form.append('tiny0', util.file('tiny0.dat'));
+        form.append('small0', util.file('small0.dat'));
 
-        //form.append('tiny0', util.file('tiny0.dat'));
-        //form.append('small0', util.file('small0.dat'));
-
-        //util.submitForm(parser, form, (err, req) => {
-            //assert.equal(err.code, 'LIMIT_UNEXPECTED_FILE');
-            //assert.equal(err.field, 'small0');
-            //assert.deepEqual(err.storageErrors, []);
+        util.submitForm(parser, form, (err, req) => {
+            assert.equal(err.code, 'LIMIT_UNEXPECTED_FILE');
+            assert.equal(err.field, 'small0');
+            assert.deepEqual(err.storageErrors, []);
 
             //TODO review
-            //gridFs.files.find({}).toArray((err, files) => assert.deepEqual(files, []));
+            const gridSchema = new mongoose.Schema({}, { strict: false });
+            const Grid = mongoose.model("Grid", gridSchema, "fs.files" );
 
-            //done();
-        //});
-    //});
+            Grid.find({}, (err, files) => {
+                if (!err) {
+                    assert.deepEqual(files, [])
+                }
+            });
+
+            done();
+        });
+    });
 });
