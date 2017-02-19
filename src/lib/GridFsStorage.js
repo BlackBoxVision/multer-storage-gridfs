@@ -14,7 +14,6 @@ class GridFsStorage {
 		this.getDestination = options.getDestination || defaultOptions.getDestination;
 		this.onUploadFinish = options.onUploadFinish || defaultOptions.onUploadFinish;
 		this.getFileName = options.getFileName || defaultOptions.getFileName;
-
 		this.streamOptions = options.streamOptions || defaultOptions.streamOptions;
 	}
 
