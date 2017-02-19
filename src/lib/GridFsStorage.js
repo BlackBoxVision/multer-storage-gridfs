@@ -1,10 +1,16 @@
-import createGridFsStream from './factory/GridFsStreamFactory';
 import defaultOptions from './utils/GridFsStorageConfig';
+import GridFs from 'gridfs-stream';
+import mongoose from 'mongoose';
 
-const gridFs = createGridFsStream();
+const connection = mongoose.connection;
+let gridFs;
+
+connection.once('open', () => {
+    gridFs = GridFs(connection.db, mongoose.mongo)
+});
 
 class GridFsStorage {
-	constructor(options) {
+	constructor(options = {}) {
 		this.getDestination = options.getDestination || defaultOptions.getDestination;
 		this.onUploadFinish = options.onUploadFinish || defaultOptions.onUploadFinish;
 		this.getFileName = options.getFileName || defaultOptions.getFileName;
@@ -17,7 +23,7 @@ class GridFsStorage {
 			if (error) {
 				return callback(error);
 			}
-			
+
 			if (gridFs) {
 				const filename = this.getFileName(file);
 				const writeStreamOptions = {

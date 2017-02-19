@@ -1,30 +1,27 @@
 import assert from 'assert';
 import fs from 'fs';
-import path from 'path';
 import multer from 'multer';
-import temp from 'fs-temp';
-import rimraf from 'rimraf';
 import FormData from 'form-data';
 
+import mongoose from 'mongoose';
+
+import GridFsStorage from '../src/lib/GridFsStorage';
 import util from './util';
 
-describe('GridFS Storage', () => {
-    let uploadDir;
-    let upload;
+let upload;
 
-    beforeEach(done => {
-        temp.mkdir((err, path) => {
-            if (err) {
-                return done(err);
-            }
+mongoose.connect('mongodb://localhost:27017', err => {
+    if (err) {
+        console.info(`An error ocurred during app init: -> ${err}`);
+    }
 
-            uploadDir = path;
-            upload = multer({ dest: path });
-            done();
-        });
+    upload = multer({
+        storage: new GridFsStorage()
     });
+});
 
-    afterEach(done => rimraf(uploadDir, done));
+describe('Testing -> GridFS Storage', () => {
+    let uploadDir;
 
     it('should process parser/form-data POST request', done => {
         const form = new FormData();
@@ -160,25 +157,6 @@ describe('GridFS Storage', () => {
 
             var files = fs.readdirSync(uploadDir);
             assert.deepEqual(files, []);
-
-            done();
-        });
-    });
-
-    it('should report error when directory doesn\'t exist', done => {
-        const directory = path.join(temp.mkdirSync(), 'ghost');
-        const dest = ($0, $1, cb) => cb(null, directory);
-
-        const storage = multer.diskStorage({ destination: dest });
-        const upload = multer({ storage: storage });
-        const parser = upload.single('tiny0');
-        const form = new FormData();
-
-        form.append('tiny0', util.file('tiny0.dat'));
-
-        util.submitForm(parser, form, (err, req) => {
-            assert.equal(err.code, 'ENOENT');
-            assert.equal(path.dirname(err.path), directory);
 
             done();
         });
