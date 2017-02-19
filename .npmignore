@@ -5,3 +5,4 @@ node_modules
 .babelrc
 README.md
 LICENSE
+.coveralls.yml

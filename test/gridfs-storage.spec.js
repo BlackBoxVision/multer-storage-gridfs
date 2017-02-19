@@ -1,7 +1,6 @@
 import assert from 'assert';
 import multer from 'multer';
 import FormData from 'form-data';
-import GridFs from 'gridfs-stream';
 
 import mongoose from 'mongoose';
 
@@ -9,8 +8,6 @@ import GridFsStorage from '../src/lib/GridFsStorage';
 import util from './util';
 
 let upload;
-let gridFs;
-
 const mongo = {
     local: 'mongodb://localhost:27017',
     remote: 'mongodb://127.0.0.1:27017'
@@ -173,9 +170,8 @@ describe('Testing -> GridFS Storage', () => {
             assert.equal(err.field, 'small0');
             assert.deepEqual(err.storageErrors, []);
 
-            //TODO review
             const gridSchema = new mongoose.Schema({}, { strict: false });
-            const Grid = mongoose.model("Grid", gridSchema, "fs.files" );
+            const Grid = mongoose.model("Grid", gridSchema, "fs.files");
 
             Grid.find({}, (err, files) => {
                 if (!err) {
