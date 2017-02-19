@@ -37,7 +37,7 @@ class GridFsStorage {
 				outStream
 					.on('error', error => callback(error))
 					.on('close', insertedFile => callback(null, insertedFile))
-					.on('finish', () => this.onUploadFinish(file))
+					.on('finish', () => this.onUploadFinish(file));
 			} else {
 				return callback(new Error("GridFs is null, please initialize mongoose connection"));
 			}
