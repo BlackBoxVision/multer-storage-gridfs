@@ -140,7 +140,7 @@ describe('Testing -> GridFS Storage', () => {
 
     it('should throw an error when passing a custom error to callback as first param', done => {
         try {
-            upload = multer({
+            const newUpload = multer({
                 storage: new GridFsStorage({
                     getDestination: (request, file, callback) => callback(new Error('Awesome Error'))
                 })
@@ -152,7 +152,7 @@ describe('Testing -> GridFS Storage', () => {
 
     it('should throw an error when mongoose connection is not open', done => {
         try {
-            upload = multer({
+            const newUpload = multer({
                 storage: new GridFsStorage()
             });
         } catch(error) {
