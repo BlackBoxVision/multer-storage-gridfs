@@ -17,12 +17,10 @@ class GridFsStorage {
 	_handleFile = (request, file, callback) => {
 		this.getDestination(request, file).then(() => {
             this.getFileName(request, file).then(filename => {
-                const writeStreamOptions = {
+                const outStream = gridFs.createWriteStream({
                     ...this.streamOptions,
                     filename
-                };
-
-                const outStream = gridFs.createWriteStream(writeStreamOptions);
+                });
 
                 file.stream.pipe(outStream);
 

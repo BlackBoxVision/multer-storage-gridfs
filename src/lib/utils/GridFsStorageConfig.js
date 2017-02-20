@@ -1,5 +1,5 @@
 export default {
-	getDestination: (request, file) => new Promise((resolve, reject) => resolve()),
-	getFilename: (request, file) => new Promise((resolve, reject) => resolve(file.originalname)),
+	getDestination: (request, file) => Promise.resolve(),
+	getFilename: (request, file) => Promise.resolve(file.originalname),
 	streamOptions: {}
 }
