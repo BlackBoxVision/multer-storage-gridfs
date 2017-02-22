@@ -30,16 +30,16 @@ class GridFsStorage {
             });
         });
     };
-	
-	_removeFile = (request, file, callback) => {
-	    gridFs.exist({_id: file._id}, (error, found) => {
-	        if (error) callback(error);
 
-	        if (found) {
-	            gridFs.remove({_id: file._id}, error => error ? callback(error) : callback(null, file._id));
-	        }
-	    });
-	};
+    _removeFile = (request, file, callback) => {
+        gridFs.exist({_id: file._id}, (error, found) => {
+            if (error) callback(error);
+
+            if (found) {
+                gridFs.remove({_id: file._id}, error => error ? callback(error) : callback(null, file._id));
+            }
+        });
+    };
 }
 
 export default GridFsStorage;
