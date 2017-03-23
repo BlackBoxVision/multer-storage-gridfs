@@ -5,7 +5,7 @@
 
 [![NPM](https://nodei.co/npm/multer-storage-gridfs.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/multer-storage-gridfs/) [![NPM](https://nodei.co/npm-dl/multer-storage-gridfs.png?months=9&height=3)](https://nodei.co/npm/multer-storage-gridfs/)
 
-##Installation
+## Installation
 
 **YARN**
 
@@ -19,18 +19,18 @@ yarn add multer-storage-gridfs
 npm install --save multer-storage-gridfs 
 ```
 
-##API Docs
+## API Docs
 
 [Read them here](/docs/API.md)
 
-##Issues
+## Issues
 
 If you found a bug, or you have an answer, or whatever. Please, open an [issue](https://github.com/BlackBoxVision/multer-gridfs/issues). I will do the best to fix it, or help you.
 
-##Contributing
+## Contributing
 
 Of course, if you see something that you want to upgrade from this library, or a bug that needs to be solved, **PRs are welcome!**
 
-##License
+## License
 
 Distributed under the **MIT license**. See [LICENSE](https://github.com/BlackBoxVision/multer-gridfs/blob/master/LICENSE) for more information.
