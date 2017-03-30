@@ -1,10 +1,10 @@
-#API Docs
+# API Docs
 
-##How it works
+## How it works
 
 **GridFsStorage** listens to mongoose connection **"open"** event. When this event is fired, internally generates a **GridFsStream** instance and it handles the methods provided for multer custom storage. 
 
-##Usage
+## Usage
 
 The usage is really simple:
 
