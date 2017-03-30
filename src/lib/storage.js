@@ -25,7 +25,7 @@ class GridFsStorage {
         file.stream.pipe(outStream);
 
         outStream
-            .on('error', err => callback(err, null))
+            .on('error', callback)
             .on('close', file => callback(null, file));
     };
 
