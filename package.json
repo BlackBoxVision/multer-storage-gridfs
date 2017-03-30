@@ -6,8 +6,8 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "compile": "babel ./src -d ./dist",
-    "build": "npm run clean && npm run compile",
-    "npm-publish": "npm run build && npm publish",
+    "build": "yarn run clean && yarn run compile",
+    "npm-publish": "yarn run build && yarn publish",
     "test": "mocha ./test --compilers js:babel-register --require babel-polyfill",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha"
   },
