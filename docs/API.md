@@ -26,7 +26,7 @@ import { GridFsStorage } from 'multer-storage-gridfs';
 //Example object with custom behavior
 const options = {
 	getFilename: (request, file) => Promise.resolve(file.originalname),
-	streamOptions: {
+	stream: {
         mode: 'w', 
         chunkSize: 1024,
         content_type: 'plain/text', 

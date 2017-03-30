@@ -1,42 +1,40 @@
-import defaultOptions from './config';
 import { connection, mongo } from 'mongoose';
 import GridFs from 'gridfs-stream';
 import to from 'await-to-js';
+
+import config from './config';
 
 let gridFs;
 connection.once('open', () => gridFs = GridFs(connection.db, mongo));
 
 class GridFsStorage {
     constructor(options = {}) {
-        this.getFileName = options.getFilename || defaultOptions.getFilename;
-        this.streamOptions = options.streamOptions || defaultOptions.streamOptions;
+        this.getFileName = options.getFilename || config.getFilename;
+        this.stream = options.stream || config.stream;
     }
 
-    _handleFile = async (request, file, callback) => {
-        const [err, data] = await to(this.getFileName(request, file));
+    async _handleFile(request, file, callback) {
+        const { getFileName, stream } = this;
 
-        if (err) callback(err);
+        const [err, data] = await to(getFileName(request, file));
 
-        const outStream = gridFs.createWriteStream({
-            ...this.streamOptions,
-            filename: data
-        });
+        if (err) callback(err, null);
+
+        const outStream = gridFs.createWriteStream({ ...stream, filename: data });
 
         file.stream.pipe(outStream);
 
         outStream
-            .on('error', callback)
+            .on('error', err => callback(err, null))
             .on('close', file => callback(null, file));
     };
 
-    _removeFile = (request, file, callback) => {
-        gridFs.exist({_id: file._id}, (error, found) => {
-            if (error) callback(error);
+    async _removeFile(request, { _id }, callback) {
+        const [err, data] = await to(gridFs.exist({_id}));
 
-            if (found) {
-                gridFs.remove({_id: file._id}, error => error ? callback(error) : callback(null, file._id));
-            }
-        });
+        if (err) callback(err, null)
+
+        if (data) gridFs.remove({_id}, err => err ? callback(err, null) : callback(null, _id));
     };
 }
 
