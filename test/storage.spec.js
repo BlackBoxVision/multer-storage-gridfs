@@ -4,7 +4,7 @@ import FormData from 'form-data';
 
 import mongoose from 'mongoose';
 
-import GridFsStorage from '../src/lib/GridFsStorage';
+import GridFsStorage from '../src/lib/storage';
 import util from './util';
 
 let upload;

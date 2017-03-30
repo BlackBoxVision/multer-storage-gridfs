@@ -1,1 +1,1 @@
-export Storage from './lib/GridFsStorage';
+export Storage from './lib/storage';
